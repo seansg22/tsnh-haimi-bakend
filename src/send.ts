@@ -26,7 +26,10 @@ async function main() {
   const result = await sendToTelegram(messages, config);
 
   if (result.status === "sent") {
-    console.log(`Done: sent ${result.messageCount} message(s) to Telegram.`);
+    console.log(`Done: sent ${result.messageCount} message(s) to ${result.recipientCount} recipient(s).`);
+  } else if (result.status === "partial") {
+    console.error(`Partial failure: sent to some recipients. Failed: ${result.failedRecipients?.join(", ")}`);
+    process.exit(1);
   } else if (result.status === "dry_run") {
     console.log(`Done: dry run complete (${result.messageCount} message(s) not sent).`);
   } else {

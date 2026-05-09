@@ -40,7 +40,9 @@ export type ReminderContent = {
 };
 
 export type SendResult = {
-  status: "dry_run" | "sent" | "failed";
+  status: "dry_run" | "sent" | "partial" | "failed";
   messageCount?: number;
+  recipientCount?: number;
+  failedRecipients?: string[];
   error?: string;
 };

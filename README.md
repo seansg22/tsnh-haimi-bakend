@@ -56,7 +56,7 @@ pnpm run send      # send to Telegram (if ENABLE_TELEGRAM_SEND=true)
 | `OPENROUTER_SITE_URL` | No | — | Sent as `HTTP-Referer` |
 | `OPENROUTER_APP_NAME` | No | `Baby Reminder Bot` | Sent as `X-Title` |
 | `TELEGRAM_BOT_TOKEN` | Conditional | — | Required when `ENABLE_TELEGRAM_SEND=true` |
-| `TELEGRAM_CHAT_ID` | Conditional | — | Required when `ENABLE_TELEGRAM_SEND=true` |
+| `TELEGRAM_CHAT_ID` | Conditional | — | Chat ID(s) to send to. Accepts a single ID or multiple comma-separated IDs (e.g. `123456789,987654321`). Required when `ENABLE_TELEGRAM_SEND=true` |
 | `ENABLE_TELEGRAM_SEND` | No | `false` | Set to `true` to actually send |
 
 ---
