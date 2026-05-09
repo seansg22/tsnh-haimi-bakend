@@ -1,0 +1,49 @@
+name: Weekly Baby Reminder
+
+on:
+  schedule:
+    # Monday 01:00 UTC = Monday 08:00 Asia/Ho_Chi_Minh
+    - cron: "0 1 * * 1"
+  workflow_dispatch:
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Send reminder
+        run: pnpm run send
+        env:
+          BABY_NAME: ${{ secrets.BABY_NAME }}
+          BABY_BIRTH_DATE: ${{ secrets.BABY_BIRTH_DATE }}
+          BABY_BIRTH_WEIGHT_GRAMS: ${{ secrets.BABY_BIRTH_WEIGHT_GRAMS }}
+          BABY_GENDER: ${{ secrets.BABY_GENDER }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TIMEZONE: Asia/Ho_Chi_Minh
+          AI_PROVIDER: openrouter
+          OPENROUTER_MODEL: openrouter/auto
+          OPENROUTER_APP_NAME: Baby Reminder Bot
+          ENABLE_TELEGRAM_SEND: "true"
+          NODE_ENV: production
