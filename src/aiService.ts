@@ -70,9 +70,9 @@ function sleep(ms: number): Promise<void> {
 
 async function callOpenRouter(
   config: Config,
-  systemPrompt: string,
-  userPrompt: string,
-  label: string
+  messages: Array<{ role: string; content: string }>,
+  label: string,
+  sessionId?: string
 ): Promise<string> {
   const MAX_RETRIES = 3;
   let lastErr: unknown;
@@ -88,11 +88,9 @@ async function callOpenRouter(
 
   const body = {
     model: config.OPENROUTER_MODEL,
-    messages: [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: userPrompt },
-    ],
+    messages,
     temperature: 0.7,
+    ...(sessionId ? { session_id: sessionId } : {}),
   };
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
@@ -134,19 +132,30 @@ export async function generateReminderContent(
   const systemPrompt = buildSystemInstruction();
   const userPrompt = buildUserPrompt(profile, age, currentDate);
 
-  console.log(`Calling OpenRouter (model: ${config.OPENROUTER_MODEL})...`);
+  const messages = [
+    { role: "system", content: systemPrompt },
+    { role: "user", content: userPrompt },
+  ];
+  const sessionId = `haimi`;
+
+  console.log(`Calling OpenRouter (model: ${config.OPENROUTER_MODEL}, session: ${sessionId})...`);
   console.log("\n--- System prompt ---\n" + systemPrompt + "\n--- User prompt ---\n" + userPrompt + "\n--- End prompt ---\n");
-  const text = await callOpenRouter(config, systemPrompt, userPrompt, "generate");
+  const text = await callOpenRouter(config, messages, "generate", sessionId);
 
   try {
     return parseAndValidate(text);
   } catch {
     console.warn("Response failed validation, attempting repair...");
+    const repairMessages = [
+      ...messages,
+      { role: "assistant", content: text },
+      { role: "user", content: buildRepairPrompt(text) },
+    ];
     const repairedText = await callOpenRouter(
       config,
-      buildSystemInstruction(),
-      buildRepairPrompt(text),
-      "repair"
+      repairMessages,
+      "repair",
+      sessionId
     );
     try {
       return parseAndValidate(repairedText);
