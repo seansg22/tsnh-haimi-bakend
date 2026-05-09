@@ -25,8 +25,6 @@ function buildBabyMessage(content: ReminderContent): string {
     `😴 Ngủ:\n${bullets(content.sleepNotes)}`,
     "",
     `⚠️ Dấu hiệu cần chú ý:\n${bullets(content.warningSigns)}`,
-    "",
-    content.closingNote.trim(),
   ];
   return parts.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 }

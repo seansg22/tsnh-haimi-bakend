@@ -36,7 +36,6 @@ export type ReminderContent = {
     nutrition: string[];
     exercise: string[];
   };
-  closingNote: string;
 };
 
 export type SendResult = {

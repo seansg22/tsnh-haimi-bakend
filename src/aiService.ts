@@ -21,7 +21,6 @@ const reminderContentSchema = z.object({
     nutrition: z.array(z.string()),
     exercise: z.array(z.string()),
   }),
-  closingNote: z.string(),
 });
 
 // Try to extract a JSON object from a string that may contain surrounding text or markdown fences
