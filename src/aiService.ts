@@ -16,7 +16,6 @@ const reminderContentSchema = z.object({
   sleepNotes: z.array(z.string()),
   warningSigns: z.array(z.string()),
   motherWellness: z.object({
-    stressRelief: z.array(z.string()),
     nutrition: z.array(z.string()),
     exercise: z.array(z.string()),
   }),

@@ -40,8 +40,6 @@ function buildMotherMessage(content: ReminderContent): string {
   const parts = [
     `💆 *Chăm sóc mẹ:*`,
     "",
-    `🧘 *Giảm stress:*\n${bullets(content.motherWellness.stressRelief)}`,
-    "",
     `🥗 *Dinh dưỡng cho mẹ:*\n${bullets(content.motherWellness.nutrition)}`,
     "",
     `🏃 *Vận động:*\n${bullets(content.motherWellness.exercise)}`,

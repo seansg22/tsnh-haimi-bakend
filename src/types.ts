@@ -31,7 +31,6 @@ export type ReminderContent = {
   sleepNotes: string[];
   warningSigns: string[];
   motherWellness: {
-    stressRelief: string[];
     nutrition: string[];
     exercise: string[];
   };
