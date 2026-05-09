@@ -29,7 +29,7 @@ const envSchema = z.object({
   TIMEZONE: z.string().default("Asia/Ho_Chi_Minh"),
   AI_PROVIDER: z.string().default("openrouter"),
   OPENROUTER_API_KEY: z.string().min(1, "OPENROUTER_API_KEY is required"),
-  OPENROUTER_MODEL: z.string().default("openrouter/auto"),
+  OPENROUTER_MODEL: z.string().default("baidu/cobuddy:free"),
   OPENROUTER_SITE_URL: z.string().optional(),
   OPENROUTER_APP_NAME: z.string().default("Baby Reminder Bot"),
   TELEGRAM_BOT_TOKEN: z.string().optional(),

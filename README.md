@@ -52,7 +52,7 @@ pnpm run send      # send to Telegram (if ENABLE_TELEGRAM_SEND=true)
 | `MOTHER_NAME` | No | `Mẹ` | Mother's name, used in the wellness message |
 | `TIMEZONE` | No | `Asia/Ho_Chi_Minh` | IANA timezone |
 | `OPENROUTER_API_KEY` | Yes | — | From [openrouter.ai/keys](https://openrouter.ai/keys) |
-| `OPENROUTER_MODEL` | No | `openrouter/auto` | Model ID (see below) |
+| `OPENROUTER_MODEL` | No | `baidu/cobuddy:free` | Model ID (see below) |
 | `OPENROUTER_SITE_URL` | No | — | Sent as `HTTP-Referer` |
 | `OPENROUTER_APP_NAME` | No | `Baby Reminder Bot` | Sent as `X-Title` |
 | `TELEGRAM_BOT_TOKEN` | Conditional | — | Required when `ENABLE_TELEGRAM_SEND=true` |

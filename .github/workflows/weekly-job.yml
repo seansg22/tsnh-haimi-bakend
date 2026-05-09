@@ -41,7 +41,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TIMEZONE: Asia/Ho_Chi_Minh
           AI_PROVIDER: openrouter
-          OPENROUTER_MODEL: openrouter/auto
+          OPENROUTER_MODEL: baidu/cobuddy:free
           OPENROUTER_APP_NAME: Baby Reminder Bot
           ENABLE_TELEGRAM_SEND: "true"
           NODE_ENV: production
