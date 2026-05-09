@@ -11,7 +11,6 @@ const reminderContentSchema = z.object({
   ageLabel: z.string(),
   summary: z.string(),
   whatToExpect: z.array(z.string()),
-  whatParentsShouldDo: z.array(z.string()),
   activities: z.array(z.string()),
   feedingNotes: z.array(z.string()),
   sleepNotes: z.array(z.string()),

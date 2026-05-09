@@ -16,8 +16,6 @@ function buildBabyMessage(content: ReminderContent): string {
     "",
     `🌱 Tuần này có thể mong đợi:\n${bullets(content.whatToExpect)}`,
     "",
-    `✅ Ba mẹ nên làm:\n${bullets(content.whatParentsShouldDo)}`,
-    "",
     `🎲 Hoạt động gợi ý:\n${bullets(content.activities)}`,
     "",
     `🍼 Ăn:\n${bullets(content.feedingNotes)}`,

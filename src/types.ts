@@ -26,7 +26,6 @@ export type ReminderContent = {
   ageLabel: string;
   summary: string;
   whatToExpect: string[];
-  whatParentsShouldDo: string[];
   activities: string[];
   feedingNotes: string[];
   sleepNotes: string[];
