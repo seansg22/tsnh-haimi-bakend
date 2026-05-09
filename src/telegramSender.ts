@@ -32,7 +32,7 @@ export async function sendToTelegram(
     try {
       for (const [i, text] of messages.entries()) {
         console.log(`Sending part ${i + 1}/${messages.length} to ${maskChatId(chatId)}...`);
-        await axios.post(url, { chat_id: chatId, text });
+        await axios.post(url, { chat_id: chatId, text, parse_mode: "MarkdownV2" });
       }
       console.log(`Sent ${messages.length} message(s) to ${maskChatId(chatId)}.`);
     } catch (err) {

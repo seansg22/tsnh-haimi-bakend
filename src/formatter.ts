@@ -3,39 +3,48 @@ import type { ReminderContent } from "./types.js";
 const MAX_MESSAGE_LENGTH = 4096;
 const MAX_BULLETS_PER_SECTION = 5;
 
+function escapeMdV2(text: string): string {
+  return text.replace(/[_*[\]()~`>#+=|{}.!\\-]/g, "\\$&");
+}
+
 function bullets(items: string[]): string {
   return items
     .slice(0, MAX_BULLETS_PER_SECTION)
-    .map((item) => `- ${item.trim()}`)
+    .map((item) => `• ${escapeMdV2(item.trim())}`)
     .join("\n");
 }
 
 function buildBabyMessage(content: ReminderContent): string {
   const parts = [
-    content.summary.trim(),
+    `👶 *${escapeMdV2(content.title)}*`,
     "",
-    `🌱 Tuần này có thể mong đợi:\n${bullets(content.whatToExpect)}`,
+    `Tuổi: *${escapeMdV2(content.ageLabel)}*`,
     "",
-    `🎲 Hoạt động gợi ý:\n${bullets(content.activities)}`,
+    `*Tóm tắt:*`,
+    escapeMdV2(content.summary.trim()),
     "",
-    `🍼 Ăn:\n${bullets(content.feedingNotes)}`,
+    `🌱 *Tuần này có thể mong đợi:*\n${bullets(content.whatToExpect)}`,
     "",
-    `😴 Ngủ:\n${bullets(content.sleepNotes)}`,
+    `🎲 *Hoạt động gợi ý:*\n${bullets(content.activities)}`,
     "",
-    `⚠️ Dấu hiệu cần chú ý:\n${bullets(content.warningSigns)}`,
+    `🍼 *Ăn:*\n${bullets(content.feedingNotes)}`,
+    "",
+    `😴 *Ngủ:*\n${bullets(content.sleepNotes)}`,
+    "",
+    `⚠️ *Dấu hiệu cần chú ý:*\n${bullets(content.warningSigns)}`,
   ];
   return parts.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 }
 
 function buildMotherMessage(content: ReminderContent): string {
   const parts = [
-    `💆 Chăm sóc mẹ:`,
+    `💆 *Chăm sóc mẹ:*`,
     "",
-    `🧘 Giảm stress:\n${bullets(content.motherWellness.stressRelief)}`,
+    `🧘 *Giảm stress:*\n${bullets(content.motherWellness.stressRelief)}`,
     "",
-    `🥗 Dinh dưỡng cho mẹ:\n${bullets(content.motherWellness.nutrition)}`,
+    `🥗 *Dinh dưỡng cho mẹ:*\n${bullets(content.motherWellness.nutrition)}`,
     "",
-    `🏃 Vận động:\n${bullets(content.motherWellness.exercise)}`,
+    `🏃 *Vận động:*\n${bullets(content.motherWellness.exercise)}`,
   ];
   return parts.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 }
