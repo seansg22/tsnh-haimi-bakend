@@ -1,7 +1,7 @@
 import axios from "axios";
 import { z } from "zod";
 import { DateTime } from "luxon";
-import { GeminiError } from "./errors.js";
+import { AIError } from "./errors.js";
 import { buildSystemInstruction, buildUserPrompt, buildRepairPrompt } from "./promptBuilder.js";
 import type { BabyAge, BabyProfile, ReminderContent } from "./types.js";
 import type { Config } from "./config.js";
@@ -42,7 +42,7 @@ function parseAndValidate(text: string): ReminderContent {
   try {
     parsed = JSON.parse(jsonText);
   } catch {
-    throw new GeminiError(`AI returned non-JSON response: ${text.slice(0, 300)}`);
+    throw new AIError(`AI returned non-JSON response: ${text.slice(0, 300)}`);
   }
   return reminderContentSchema.parse(parsed);
 }
@@ -122,7 +122,7 @@ async function callOpenRouter(
   const detail = axios.isAxiosError(lastErr)
     ? `HTTP ${lastErr.response?.status}: ${JSON.stringify(lastErr.response?.data)}`
     : String(lastErr);
-  throw new GeminiError(`OpenRouter request failed: ${detail}`);
+  throw new AIError(`OpenRouter request failed: ${detail}`);
 }
 
 export async function generateReminderContent(
@@ -154,7 +154,7 @@ export async function generateReminderContent(
       return parseAndValidate(repairedText);
     } catch (secondError) {
       const detail = secondError instanceof Error ? secondError.message : String(secondError);
-      throw new GeminiError(`AI response invalid after repair attempt: ${detail}`);
+      throw new AIError(`AI response invalid after repair attempt: ${detail}`);
     }
   }
 }

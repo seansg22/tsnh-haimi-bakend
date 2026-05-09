@@ -1,7 +1,7 @@
 {
   "name": "tsnh-haimi-bakend",
   "version": "1.0.0",
-  "description": "Weekly baby development reminder via Gemini + Telegram",
+  "description": "Weekly baby development reminder via AI + Telegram",
   "type": "module",
   "scripts": {
     "dev": "tsx src/send.ts",

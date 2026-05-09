@@ -1,4 +1,4 @@
-name: Weekly Baby Reminder
+name: Weekly Job
 
 on:
   schedule:

@@ -12,10 +12,10 @@ export class ValidationError extends Error {
   }
 }
 
-export class GeminiError extends Error {
+export class AIError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = "GeminiError";
+    this.name = "AIError";
   }
 }
 
